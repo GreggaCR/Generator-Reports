@@ -19,7 +19,6 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
-USE_AI = False #  выключено так как API недоступен
 
 # --- СЛОВАРЬ ПАДЕЖЕЙ ДЛЯ ШАБЛОНА ---
 PRACTICE_CASES = {
@@ -320,50 +319,6 @@ def find_in_prikaz(prikaz_path, student_name):
     except:
         pass
     return res
-
-
-
-""" def generate_summary(text):
-    if not USE_AI:
-        return None
-
-    try:
-        from openai import OpenAI
-        client = OpenAI(api_key= "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")
-
-        prompt = f""" """
-""" """ Сожми следующий текст в ОДНО короткое деловое предложение (5–10 слов).
-
-Требования:
-- без "я"
-- без воды
-- стиль: отчет по практике
-- использовать глаголы: разработал, реализовал, создал, изучил, проанализировал
-- добавить конкретику (инструмент, система, анализ)
-
-Текст: """
-#{text}
-"""
-
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3
-        )
-
-        result = response.choices[0].message.content.strip()
-
-        # простая валидация
-        if 4 <= len(result.split()) <= 12:
-            return result
-
-    except Exception as e:
-        print("AI ошибка:", e)
-
-    return None
- """
-
-
 
 def extract_all_text(doc):
     parts = []
@@ -730,7 +685,7 @@ def generate_doc(parsed_data):
     except Exception as e:
         messagebox.showerror("Ошибка", f"Сбой: {str(e)}")
 def start_gen():
-    # ====================== НОВЫЕ ПРОВЕРКИ ======================
+
     for lbl in [err_ved, err_pr, err_fld, err_tpl, date_error_lbl, err_type]:
         lbl.config(text="")
 
